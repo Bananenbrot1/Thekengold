@@ -1,0 +1,18 @@
+%p#notice= notice
+%h1 Barcodes
+%table
+  %thead
+    %tr
+      %th ID
+      %th Team
+      %th{:colspan => "3"}
+  %tbody
+    - @barcodes.each do |barcode|
+      %tr
+        %td= barcode.id
+        %td= barcode.team.name
+        %td= link_to 'Show', barcode
+        %td= link_to 'Edit', edit_barcode_path(barcode)
+        %td= link_to 'Destroy', barcode, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Barcode', new_barcode_path
