@@ -63,6 +63,20 @@ class BarcodesController < ApplicationController
     end
   end
 
+  def createBarcodes
+    amount = params[:count]
+    team = params[:team]
+
+    for i in 1..amount.to_i do
+      barcode = Barcode.new
+      barcode.team_id = team
+
+      barcode.save
+    end
+
+    redirect_to team_path(team)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_barcode

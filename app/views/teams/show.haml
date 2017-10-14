@@ -1,0 +1,28 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @team.name
+%p
+  %strong Gender:
+  = @team.gender
+%p
+  %strong Amount:
+  = @team.amount
+= link_to 'Edit', edit_team_path(@team)
+|
+\#{link_to 'Back', teams_path}
+%p
+  %strong Barcodes erstellen
+  = form_tag({controller: "barcodes", action: "createBarcodes"}, method: "post") do
+    = text_field_tag "count"
+    = hidden_field_tag 'team', @team.id
+    = submit_tag "Erstellen"
+%p
+  %strong Barcodes:
+  %table
+    %thead
+      %th ID
+    %tbody
+      - @team.barcodes.each do |barcode|
+        %tr
+          %td= barcode.id
