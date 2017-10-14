@@ -1,2 +1,0 @@
-class Barcode < ApplicationRecord
-end

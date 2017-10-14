@@ -3,7 +3,9 @@
 one:
   name: MyString
   gender: false
+  amount: 1
 
 two:
   name: MyString
   gender: false
+  amount: 1
