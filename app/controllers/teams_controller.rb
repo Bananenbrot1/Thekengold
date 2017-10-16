@@ -5,6 +5,18 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.all
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = MarkenPdf.new(@teams)
+
+        send_data pdf.render,
+            filename: "wertmarken",
+            type: 'application/pdf',
+            disposition: 'inline'
+      end
+    end
   end
 
   # GET /teams/1
