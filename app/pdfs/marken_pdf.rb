@@ -5,13 +5,13 @@ class MarkenPdf < Prawn::Document
   def initialize(teams)
     super()
     teams.each do |team|
-      createMarkenTeam(team.barcodes.count, team.barcodes, team.gender)
+      createMarkenTeam(team.barcodes.count, team.barcodes, team.gender, team.color)
       start_new_page
     end
 
   end
 
-  def createMarkenTeam(anzahl, barcodes, gender)
+  def createMarkenTeam(anzahl, barcodes, gender, color)
     x = 0
     y = 715
     itemPerPage = 0
@@ -22,7 +22,7 @@ class MarkenPdf < Prawn::Document
         x = 0
         y = 715
         for a in 1..8
-          markeHinten(x,y, barcodes[i-1-a].id, gender)
+          markeHinten(x,y, barcodes[i-1-a].id, gender, color)
           barcodeCount = barcodeCount + 1
 
           if x == 0 then
@@ -53,7 +53,7 @@ class MarkenPdf < Prawn::Document
         y = 715
         leftbarcodes = anzahl - barcodeCount
         for b in 1..leftbarcodes
-          markeHinten(x,y, barcodes[i-b].id, gender)
+          markeHinten(x,y, barcodes[i-b].id, gender, color)
 
           if x == 0 then
             x = 267.5
@@ -84,13 +84,14 @@ class MarkenPdf < Prawn::Document
     end
   end
 
-  def markeHinten(x,y, barcode, gender)
+  def markeHinten(x,y, barcode, gender, color)
     bounding_box([x, y], width: 267.5, height: 178.75) do
       barcode = Barby::Code39.new(barcode.to_s)
       outputter = Barby::PrawnOutputter.new(barcode)
       outputter.annotate_pdf(self, x:100, y:60)
       text_box barcode.to_s, at: [10,20]
       text_box setGender(gender), at: [10, 170]
+      text_box color, at: [220, 20]
       stroke_bounds
     end
   end
