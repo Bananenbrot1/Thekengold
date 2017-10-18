@@ -5,13 +5,13 @@ class MarkenPdf < Prawn::Document
   def initialize(teams)
     super()
     teams.each do |team|
-      createMarkenTeam(team.barcodes.count, team.barcodes)
+      createMarkenTeam(team.barcodes.count, team.barcodes, team.gender)
       start_new_page
     end
 
   end
 
-  def createMarkenTeam(anzahl, barcodes)
+  def createMarkenTeam(anzahl, barcodes, gender)
     x = 0
     y = 715
     itemPerPage = 0
@@ -22,7 +22,7 @@ class MarkenPdf < Prawn::Document
         x = 0
         y = 715
         for a in 1..8
-          markeHinten(x,y, barcodes[i-1-a].id)
+          markeHinten(x,y, barcodes[i-1-a].id, gender)
           barcodeCount = barcodeCount + 1
 
           if x == 0 then
@@ -37,7 +37,7 @@ class MarkenPdf < Prawn::Document
         x = 0
         y = 715
       end
-      markeVorne(x,y)
+      markeVorne(x,y,gender)
       itemPerPage = itemPerPage + 1
 
       if x == 0 then
@@ -53,7 +53,7 @@ class MarkenPdf < Prawn::Document
         y = 715
         leftbarcodes = anzahl - barcodeCount
         for b in 1..leftbarcodes
-          markeHinten(x,y, barcodes[i-b].id)
+          markeHinten(x,y, barcodes[i-b].id, gender)
 
           if x == 0 then
             x = 267.5
@@ -66,9 +66,10 @@ class MarkenPdf < Prawn::Document
     end
   end
 
-  def markeVorne(x,y)
+  def markeVorne(x,y,gender)
     bounding_box([x, y], width: 267.5, height: 178.75) do
       text_box "10€", at: [15,163], size: 30
+      text_box setGender(gender), at:[120,163], size: 30
       text_box "ÖPC", at: [190,163], size: 30
       data = [
         ['0,50', '0,50', '0,50', '0,50', '0,50'],
@@ -83,13 +84,24 @@ class MarkenPdf < Prawn::Document
     end
   end
 
-  def markeHinten(x,y, barcode)
+  def markeHinten(x,y, barcode, gender)
     bounding_box([x, y], width: 267.5, height: 178.75) do
       barcode = Barby::Code39.new(barcode.to_s)
       outputter = Barby::PrawnOutputter.new(barcode)
       outputter.annotate_pdf(self, x:100, y:60)
       text_box barcode.to_s, at: [10,20]
+      text_box setGender(gender), at: [10, 170]
       stroke_bounds
     end
+  end
+
+  def setGender(gender)
+    if gender then
+      genderText = "M"
+    else
+      genderText = "W"
+    end
+
+    return genderText
   end
 end
