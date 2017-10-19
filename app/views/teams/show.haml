@@ -25,7 +25,11 @@
   %table
     %thead
       %th ID
+      %th Scan
+      %th
     %tbody
       - @team.barcodes.each do |barcode|
         %tr
           %td= barcode.id
+          %td= barcode.scan
+          %td= link_to 'Edit', edit_barcode_path(barcode)

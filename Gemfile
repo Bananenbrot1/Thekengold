@@ -30,10 +30,12 @@ gem 'haml'
 gem 'simple_form'
 gem 'prawn'
 gem 'prawn-table'
-gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
 gem 'responders'
 gem 'barby'
+gem 'chart-js-rails'
+gem 'seed_dump'
+gem 'gon'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

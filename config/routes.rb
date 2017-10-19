@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root 'pages#index'
+  get 'pages/scanner'
+  post "pages/addScan", to: 'pages#addScan',:as => :addScan
+
   resources :barcodes
   post "barcodes/createBarcodes", to: 'barcodes#createBarcodes',:as => :createBarcodes
   resources :teams
