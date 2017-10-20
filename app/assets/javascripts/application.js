@@ -20,7 +20,7 @@ $(document).on('turbolinks:load', function() {
 
   var female = document.getElementById("femaleChart");
   var male = document.getElementById("maleChart");
-  var femaleChart = new Chart(female, {
+  var maleChart = new Chart(male, {
       type: 'bar',
       data: {
           labels: gon.maleteamsLabels,
@@ -28,12 +28,15 @@ $(document).on('turbolinks:load', function() {
               label: 'Herren',
               data: gon.maleteamsAmount,
               backgroundColor: [
-                  'rgba(226, 29, 71, 1.0)',
+                  'rgba(132, 79, 33, 1.0)',
+                  'rgba(255, 0, 246, 1.0)',
+                  'rgba(21, 16, 145, 1.0)',
                   'rgba(19, 146, 17, 1.0)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(178, 145, 255, 1.0)',
+                  'rgba(30, 217, 255, 1.0)',
+                  'rgba(237, 28, 28, 1.0)',
+                  'rgba(238, 242, 14, 1.0)'
               ],
               borderColor: [
                   'rgba(255,99,132,1)',
@@ -59,7 +62,7 @@ $(document).on('turbolinks:load', function() {
           }
       }
   });
-  var maleChart = new Chart(male, {
+  var femaleChart = new Chart(female, {
       type: 'bar',
       data: {
           labels: gon.femaleteamsLabels,
@@ -67,12 +70,16 @@ $(document).on('turbolinks:load', function() {
               label: 'Damen',
               data: gon.femaleteamsAmount,
               backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
+                'rgba(19, 146, 17, 1.0)',
+                'rgba(132, 79, 33, 1.0)',
+                'rgba(21, 16, 145, 1.0)',
+                'rgba(30, 217, 255, 1.0)',
+                'rgba(237, 28, 28, 1.0)',
+                'rgba(178, 145, 255, 1.0)',
+                'rgba(238, 242, 14, 1.0)',
+                'rgba(255, 255, 255, 1.0)',
+                'rgba(255, 165, 0, 1.0)',
+                'rgba(255, 0, 246, 1.0)'
               ],
               borderColor: [
                   'rgba(255,99,132,1)',
