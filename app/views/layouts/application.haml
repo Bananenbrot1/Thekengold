@@ -4,9 +4,12 @@
     %title Thekengold
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    = Gon::Base.render_data
+    - if params[:action] == "index"
+      -if params[:controller] == "pages"
+        %meta{:content => "5", "http-equiv" => "refresh"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = Gon::Base.render_data
   %body
     .container-fluid
       = yield

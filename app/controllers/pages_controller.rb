@@ -14,9 +14,9 @@ class PagesController < ApplicationController
       femaleAmount.push a.amount
       femaleLabels.push a.name
     end
-    gon.maleteamsAmount = maleAmount
+    gon.watch.maleteamsAmount = maleAmount
     gon.maleteamsLabels = maleLabels
-    gon.femaleteamsAmount = femaleAmount
+    gon.watch.femaleteamsAmount = femaleAmount
     gon.femaleteamsLabels = femaleLabels
   end
 
